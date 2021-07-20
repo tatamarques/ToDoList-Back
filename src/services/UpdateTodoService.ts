@@ -9,7 +9,7 @@ interface RequestDTO {
   id: string;
   title: string;
   description: string;
-  //dueDate: Date;
+
 }
 
 class UpdateTodoService {
@@ -22,11 +22,11 @@ class UpdateTodoService {
 
     if (todoid) {
       todoid.description = description; 
-      const createOn = todoid.createdOn;
+      
     }
 
         
-    const todoDueDate = startOfHour(new Date());
+    const todoDueDate = new Date();
   
 
     const todo = {

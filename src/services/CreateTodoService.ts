@@ -1,5 +1,5 @@
-import { startOfHour } from 'date-fns';
 import {getCustomRepository} from 'typeorm';
+import { startOfHour } from 'date-fns';
 import {uuid} from 'uuidv4';
 
 import Todo from '../typeorm/entities/Todo';
@@ -17,8 +17,8 @@ class CreateTodoService {
   public async execute({title, description}: RequestDTO): Promise<Todo>{
     const todoRepository = getCustomRepository(TodoRepository);
 
-    const todoCreatedOn = startOfHour(new Date());
-    const todoDueDate = startOfHour(new Date());
+    const todoCreatedOn = new Date();
+    const todoDueDate = new Date();
 
     const todo = todoRepository.create({
       id: uuid(),

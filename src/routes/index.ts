@@ -1,11 +1,11 @@
-import {request, Router} from 'express';
+import {Router} from 'express';
 import { getCustomRepository} from 'typeorm';
 
 
 import TodoRepository from '../repositories';
 import CreateTodoService from '../services/CreateTodoService';
 import UpdateTodoService from '../services/UpdateTodoService';
-import { parseISO} from 'date-fns';
+
 
 
 const routes = Router();
@@ -19,18 +19,14 @@ routes.get('/',  async (request, response) => {
 
 routes.post('/', async (request, response) => {
   try{
-    const { title, description, createdOn, dueDate} = request.body;
+    const { title, description} = request.body;
 
-    const parsedCreatedOn = parseISO(createdOn);
-    const parsedDueDate = parseISO(dueDate);
-        
+       
     const createTodo = new CreateTodoService();
 
     const todo = await createTodo.execute({
       title,
       description,
-      //createdOn: parsedCreatedOn,
-      //dueDate: parsedDueDate
     })
 
   return response.json(todo);
@@ -44,11 +40,9 @@ routes.put('/:id', async (request, response) => {
 
     const id = request.params.id;
    
-    const {title, description, dueDate} = request.body;
+    const {title, description} = request.body;
 
-    const parsedDueDate = parseISO(dueDate);
-    
-    
+  
     const updateTodo = new UpdateTodoService();
 
     const todo = await updateTodo.execute({
